@@ -4,9 +4,11 @@
     overflow: hidden;
     position: fixed;
 }
+
 #canvas3d {
     z-index: 1;
 }
+
 #canvas2d {
     z-index: 100;
     width: 100%;
