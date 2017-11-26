@@ -59,15 +59,31 @@ function initObject() {
         rayReceiveObjects.push(works[i]);
         works[i].name = portfolioData[i].name;
         works[i].url = portfolioData[i].url;
+        works[i].degree = 0;
     }
 }
 
 var step = 0;
+var translateValue = 0;
 function loop() {
     step++;
     for (var i = 0; i < works.length; i++) {
         works[i].rotation.set(step / 100, step / 100, step / 100);
+
+        if (translateValue !== 0) {
+            if (translateValue > 0) {
+                works[i].degree++;
+                translateValue--;
+            } else if (translateValue < 0) {
+                works[i].degree--;
+                translateValue++;
+            }
+            works[i].position.set(
+                Math.cos(Math.radians(i * 360 / portfolioData.length + works[i].degree)) * 100, 
+                Math.sin(Math.radians(i * 360 / portfolioData.length + works[i].degree)) * 100, 0);
+        }        
     }
+
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
 }
@@ -78,7 +94,22 @@ function initEvent() {
     });
 
     $(window).keydown(function(event) {
-        alert(getIntersects(0, 0));
+        var RIGHT = 39;
+        var LEFT = 37;
+        var SPACE = 32;
+        switch (event.keyCode) {
+            case RIGHT:
+                translateValue -= 360 / portfolioData.length * 3;
+                break;
+            case LEFT:
+                translateValue += 360 / portfolioData.length * 3;
+                break;
+            case SPACE:
+                alert(getIntersects(0, 0));
+                break;
+            default:
+                break;
+        }
     });
 
     $(window).resize(function(event) {
