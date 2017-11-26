@@ -50,7 +50,7 @@ function initObject() {
     var geometry = new THREE.CubeGeometry(30, 30, 30);
 
     for (var i = 0; i < portfolioData.length; i++) {
-        var texture = THREE.ImageUtils.loadTexture('./images/' + portfolioData[i].img);
+        var texture = THREE.ImageUtils.loadTexture('../images/' + portfolioData[i].img);
         texture.anisotropy = renderer.getMaxAnisotropy();
         var material = new THREE.MeshBasicMaterial({map: texture});
 
