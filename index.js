@@ -48,9 +48,12 @@ var works = [];
 var rayReceiveObjects = [];
 function initObject() {
     var geometry = new THREE.CubeGeometry(30, 30, 30);
-    var material = new THREE.MeshNormalMaterial();
 
     for (var i = 0; i < portfolioData.length; i++) {
+        var texture = THREE.ImageUtils.loadTexture('./images/' + portfolioData[i].img);
+        texture.anisotropy = renderer.getMaxAnisotropy();
+        var material = new THREE.MeshBasicMaterial({map: texture});
+
         works[i] = new THREE.Mesh(geometry, material);
         scene.add(works[i]);
         works[i].position.set(
@@ -106,7 +109,9 @@ function initEvent() {
                 break;
             case SPACE:
                 var obj = getIntersects(0, 0);
-                window.open(obj.url, '_blank');
+                if (obj !== false) {
+                    window.open(obj.url, '_blank');
+                }
                 break;
             default:
                 break;
