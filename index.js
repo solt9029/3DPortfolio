@@ -41,7 +41,7 @@ function initCamera() {
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.set(0, 0, 0);
     camera.up.set(0, 0, 1);
-    camera.lookAt({x: 0, y: 1, z: 0});
+    camera.lookAt({x: 1, y: 0, z: 0});
 }
 
 var works = [];
@@ -50,27 +50,25 @@ function initObject() {
     var geometry = new THREE.CubeGeometry(30, 30, 30);
     var material = new THREE.MeshNormalMaterial();
 
-    // portfolioのdatajsonをつくる後で
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < portfolioData.length; i++) {
         works[i] = new THREE.Mesh(geometry, material);
         scene.add(works[i]);
-        works[i].position.set(Math.cos(Math.radians(i * 45)) * 100, Math.sin(Math.radians(i * 45)) * 100, 0);
+        works[i].position.set(
+            Math.cos(Math.radians(i * 360 / portfolioData.length)) * 100, 
+            Math.sin(Math.radians(i * 360 / portfolioData.length)) * 100, 0);
         rayReceiveObjects.push(works[i]);
+        works[i].name = portfolioData[i].name;
+        works[i].url = portfolioData[i].url;
     }
-
-    works[0].name = "箱１";
-    works[1].name = "箱２";
-    works[2].name = "箱３";
 }
 
 var step = 0;
 function loop() {
     step++;
-    works[0].rotation.set(step / 100, 0, 0);
-    works[1].rotation.set(0, step / 100, 0);
-    works[2].rotation.set(0, 0, step / 100);
+    for (var i = 0; i < works.length; i++) {
+        works[i].rotation.set(step / 100, step / 100, step / 100);
+    }
     renderer.render(scene, camera);
-
     requestAnimationFrame(loop);
 }
 
