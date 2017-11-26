@@ -24,8 +24,8 @@ function initThree() {
 
 var canvas2d, ctx;
 function initTwo() {
-    var canvas2d = document.getElementById('canvas2d');
-    var ctx = canvas2d.getContext('2d');
+    canvas2d = document.getElementById('canvas2d');
+    ctx = canvas2d.getContext('2d');
     ctx.clearRect(0, 0, canvas2d.width, canvas2d.height);
     ctx.beginPath();
     ctx.moveTo(20, 20);
@@ -50,25 +50,17 @@ function initObject() {
     var geometry = new THREE.CubeGeometry(30, 30, 30);
     var material = new THREE.MeshNormalMaterial();
 
-    works[0] = new THREE.Mesh(geometry, material);
-    scene.add(works[0]);
-    works[0].position.set(0, -50, 0);
-
-    works[1] = new THREE.Mesh(geometry, material);
-    scene.add(works[1]);
-    works[1].position.set(0, 0, 0);
-
-    works[2] = new THREE.Mesh(geometry, material);
-    scene.add(works[2]);
-    works[2].position.set(0, 50, 0);
+    // portfolioのdatajsonをつくる後で
+    for (var i = 0; i < 8; i++) {
+        works[i] = new THREE.Mesh(geometry, material);
+        scene.add(works[i]);
+        works[i].position.set(Math.cos(Math.radians(i * 45)) * 100, Math.sin(Math.radians(i * 45)) * 100, 0);
+        rayReceiveObjects.push(works[i]);
+    }
 
     works[0].name = "箱１";
     works[1].name = "箱２";
     works[2].name = "箱３";
-
-    rayReceiveObjects.push(works[0]);
-    rayReceiveObjects.push(works[1]);
-    rayReceiveObjects.push(works[2]);
 }
 
 var step = 0;
@@ -84,11 +76,15 @@ function loop() {
 
 function initEvent() {
     $(window).mousedown(function(event) {
-        alert(event.offsetX);
+        // alert(event.offsetX);
     });
 
     $(window).keydown(function(event) {
         alert(getIntersects(0, 0));
+    });
+
+    $(window).resize(function(event) {
+        // alert('resize');
     });
 }
 
@@ -111,3 +107,13 @@ function getIntersects(x, y) {
     }
     return false;
 }
+
+// Converts from degrees to radians.
+Math.radians = function(degrees) {
+    return degrees * Math.PI / 180;
+};
+   
+// Converts from radians to degrees.
+Math.degrees = function(radians) {
+    return radians * 180 / Math.PI;
+};
