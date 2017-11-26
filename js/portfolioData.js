@@ -23,5 +23,30 @@ var portfolioData = [
         name: 'Works',
         url: 'http://works.solt9029.com',
         img: 'works.png'
+    },
+    {
+        name: '10 Fast Fingers Music Game Ver.',
+        url: 'https://www.youtube.com/watch?v=pqP6-2o-1tk',
+        img: '10fastfingersmusicgamever..png'
+    },
+    {
+        name: 'English Diary',
+        url: 'http://englishdiary.solt9029.com/pages/',
+        img: 'englishdiary.png'
+    },
+    {
+        name: '太鼓の達人 表現手法の拡張',
+        url: 'http://taikomotioneffect.solt9029.com',
+        img: 'taikomotioneffect.png'
+    },
+    {
+        name: 'Solt Particles',
+        url: 'https://solt9029.github.io/SoltParticles/',
+        img: 'soltparticles.png'
+    },
+    {
+        name: 'Tubeat',
+        url: 'https://www.youtube.com/watch?v=VfxNlh0N7yc',
+        img: 'tubeat.png'
     }
 ];
