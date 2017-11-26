@@ -18,5 +18,10 @@ var portfolioData = [
         name: '太鼓エディタ',
         url: 'https://www.youtube.com/watch?v=JH0EtjWfa20&feature=youtu.be',
         img: 'taikoeditor.jpg'
+    },
+    {
+        name: 'Works',
+        url: 'http://works.solt9029.com',
+        img: 'works.png'
     }
 ];

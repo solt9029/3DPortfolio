@@ -93,7 +93,12 @@ function loop() {
 
 function initEvent() {
     $(window).mousedown(function(event) {
-        // alert(event.offsetX);
+        var obj = getIntersects(
+            (event.clientX / window.innerWidth) * 2 - 1, 
+            (event.clientY / window.innerHeight) * 2 - 1);
+        if (obj !== false) {
+            window.open(obj.url, '_blank');
+        }
     });
 
     $(window).keydown(function(event) {
