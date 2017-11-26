@@ -108,4 +108,32 @@ function initEvent() {
             console.log("光線との交差座標(" + intersects[0].point.x + ", " + intersects[0].point.y + ", " + intersects[0].point.z + ")" );
         }
     }
+
+    $(window).mousedown(function(event) {
+        alert(event.offsetX);
+    });
+
+    $(window).keydown(function(event) {
+        event.preventDefault();
+        var mx = 0;
+        var my = 0;
+        var vector = new THREE.Vector3(mx, my, 0.5);
+        //プロジェクターオブジェクトの生成
+        var projector = new THREE.Projector();
+        //逆投影変換を行うことで仮想空間内のベクトルへと変換する
+        vector = projector.unprojectVector(vector, camera);
+        //カメラ位置座標を起点として規格化を行う
+        vector = vector.sub( camera.position ).normalize();
+        //カメラ位置座標から光線を発射
+        var raycaster = new THREE.Raycaster(camera.position, vector);
+        //光線と交わるオブジェクトを収集
+        var intersects = raycaster.intersectObjects(rayReceiveObjects);
+        //交わるオブジェクトが１個以上の場合
+        if (intersects.length > 0) {
+            //最も近いオブジェクトの名前をアラート表示する
+            alert(intersects[0].object.name + "がクリックされました！");
+            console.log("カメラ位置座標からの距離：" + intersects[0].distance);
+            console.log("光線との交差座標(" + intersects[0].point.x + ", " + intersects[0].point.y + ", " + intersects[0].point.z + ")" );
+        }
+    });
 }
