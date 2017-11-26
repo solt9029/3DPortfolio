@@ -99,13 +99,14 @@ function initEvent() {
         var SPACE = 32;
         switch (event.keyCode) {
             case RIGHT:
-                translateValue -= 360 / portfolioData.length * 3;
+                translateValue -= 360;
                 break;
             case LEFT:
-                translateValue += 360 / portfolioData.length * 3;
+                translateValue += 360;
                 break;
             case SPACE:
-                alert(getIntersects(0, 0));
+                var obj = getIntersects(0, 0);
+                window.open(obj.url, '_blank');
                 break;
             default:
                 break;
@@ -132,7 +133,7 @@ function getIntersects(x, y) {
     var intersects = raycaster.intersectObjects(rayReceiveObjects);
     //交わるオブジェクトが１個以上の場合
     if (intersects.length > 0) {
-        return intersects[0].object.name;
+        return intersects[0].object;
     }
     return false;
 }
