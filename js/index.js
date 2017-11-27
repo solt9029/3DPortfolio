@@ -41,7 +41,7 @@ function initCamera() {
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.set(0, 0, 0);
     camera.up.set(0, 0, 1);
-    camera.lookAt({x: 1, y: 0, z: 0});
+    camera.lookAt({x: 100, y: 0, z: 0});
 }
 
 var works = [];
@@ -64,6 +64,22 @@ function initObject() {
         works[i].url = portfolioData[i].url;
         works[i].degree = 0;
     }
+    var parameters = {
+        size: 10, height: 2, curveSegments: 2,
+        font: 'helvetiker', weight: 'normal', style: 'normal',
+        bevelEnabled: false, bevelThickness: 2, bevelSize:2
+    }
+    var geometry = new THREE.TextGeometry("three.js", parameters);
+    var material = new THREE.MeshNormalMaterial();
+    text = new THREE.Mesh(geometry, material);
+    scene.add(text);
+    geometry.computeBoundingBox();
+    var w = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+    console.log(w);
+    text.position.set(
+        Math.cos(Math.radians(0 * 360 / portfolioData.length)) * 100, 
+        Math.sin(Math.radians(0 * 360 / portfolioData.length)) * 100 + w / 2, 20);
+    text.rotation.set(Math.radians(90), Math.radians(270), 0);
 }
 
 var step = 0;
