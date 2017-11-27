@@ -46,6 +46,7 @@ function initCamera() {
 
 var works = [];
 var rayReceiveObjects = [];
+var texts = [];
 function initObject() {
     var geometry = new THREE.CubeGeometry(30, 30, 30);
 
@@ -64,22 +65,24 @@ function initObject() {
         works[i].url = portfolioData[i].url;
         works[i].degree = 0;
     }
-    var parameters = {
-        size: 10, height: 2, curveSegments: 2,
-        font: 'helvetiker', weight: 'normal', style: 'normal',
-        bevelEnabled: false, bevelThickness: 2, bevelSize:2
+
+    for (var i = 0; i < portfolioData.length; i++) {
+        var parameters = {
+            size: 5, height: 2, curveSegments: 2,
+            font: 'helvetiker', weight: 'normal', style: 'normal',
+            bevelEnabled: false, bevelThickness: 2, bevelSize:2
+        }
+        var geometry = new THREE.TextGeometry(portfolioData[i].name, parameters);
+        var material = new THREE.MeshNormalMaterial();
+        texts[i] = new THREE.Mesh(geometry, material);
+        scene.add(texts[i]);
+        geometry.computeBoundingBox();
+        var w = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+        texts[i].position.set(
+            Math.cos(Math.radians(i * 360 / portfolioData.length)) * 100, 
+            Math.sin(Math.radians(i * 360 / portfolioData.length)) * 100 + w / 2, 27.5);
+        texts[i].rotation.set(Math.radians(90), Math.radians(270), 0);
     }
-    var geometry = new THREE.TextGeometry("three.js", parameters);
-    var material = new THREE.MeshNormalMaterial();
-    text = new THREE.Mesh(geometry, material);
-    scene.add(text);
-    geometry.computeBoundingBox();
-    var w = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
-    console.log(w);
-    text.position.set(
-        Math.cos(Math.radians(0 * 360 / portfolioData.length)) * 100, 
-        Math.sin(Math.radians(0 * 360 / portfolioData.length)) * 100 + w / 2, 20);
-    text.rotation.set(Math.radians(90), Math.radians(270), 0);
 }
 
 var step = 0;
