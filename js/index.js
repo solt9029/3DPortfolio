@@ -82,6 +82,7 @@ function initObject() {
             Math.cos(Math.radians(i * 360 / portfolioData.length)) * 100, 
             Math.sin(Math.radians(i * 360 / portfolioData.length)) * 100 + texts[i].width / 2, 27.5);
         texts[i].rotation.set(Math.radians(90), Math.radians(270), 0);
+        texts[i].degree = 0;
     }
 }
 
@@ -95,14 +96,19 @@ function loop() {
         if (translateValue !== 0) {
             if (translateValue > 0) {
                 works[i].degree++;
+                texts[i].degree++;
                 translateValue--;
             } else if (translateValue < 0) {
                 works[i].degree--;
+                texts[i].degree--;
                 translateValue++;
             }
             works[i].position.set(
                 Math.cos(Math.radians(i * 360 / portfolioData.length + works[i].degree)) * 100, 
                 Math.sin(Math.radians(i * 360 / portfolioData.length + works[i].degree)) * 100, 0);
+            texts[i].position.set(
+                Math.cos(Math.radians(i * 360 / portfolioData.length + texts[i].degree)) * 100, 
+                Math.sin(Math.radians(i * 360 / portfolioData.length + texts[i].degree)) * 100 + texts[i].width / 2, 27.5);
         }
     }
 
