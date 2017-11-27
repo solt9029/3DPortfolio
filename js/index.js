@@ -77,10 +77,10 @@ function initObject() {
         texts[i] = new THREE.Mesh(geometry, material);
         scene.add(texts[i]);
         geometry.computeBoundingBox();
-        var w = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+        texts[i].width = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
         texts[i].position.set(
             Math.cos(Math.radians(i * 360 / portfolioData.length)) * 100, 
-            Math.sin(Math.radians(i * 360 / portfolioData.length)) * 100 + w / 2, 27.5);
+            Math.sin(Math.radians(i * 360 / portfolioData.length)) * 100 + texts[i].width / 2, 27.5);
         texts[i].rotation.set(Math.radians(90), Math.radians(270), 0);
     }
 }
@@ -103,7 +103,7 @@ function loop() {
             works[i].position.set(
                 Math.cos(Math.radians(i * 360 / portfolioData.length + works[i].degree)) * 100, 
                 Math.sin(Math.radians(i * 360 / portfolioData.length + works[i].degree)) * 100, 0);
-        }        
+        }
     }
 
     renderer.render(scene, camera);
