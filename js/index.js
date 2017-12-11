@@ -25,13 +25,31 @@ function initThree() {
 var canvas2d, ctx;
 function initTwo() {
     canvas2d = document.getElementById('canvas2d');
+    canvas2d.width = window.innerWidth;
+    canvas2d.height = window.innerHeight;
     ctx = canvas2d.getContext('2d');
     ctx.clearRect(0, 0, canvas2d.width, canvas2d.height);
+
+    ctx.strokeStyle = 'rgb(255, 0, 0)';
+    ctx.lineWidth = 1;
+
+    // 横線
     ctx.beginPath();
-    ctx.moveTo(20, 20);
-    ctx.lineTo(120, 20);
-    ctx.lineTo(120, 120);
-    ctx.lineTo(20, 120);
+    ctx.moveTo(0, canvas2d.height / 2);
+    ctx.lineTo(canvas2d.width, canvas2d.height /2);
+    ctx.closePath();
+    ctx.stroke();
+
+    // 縦線
+    ctx.beginPath();
+    ctx.moveTo(canvas2d.width / 2, 0);
+    ctx.lineTo(canvas2d.width / 2, canvas2d.height);
+    ctx.closePath();
+    ctx.stroke();
+
+    // 円
+    ctx.beginPath();
+    ctx.arc(canvas2d.width / 2, canvas2d.height / 2, canvas2d.width / 20, 0, Math.PI * 2, false);
     ctx.closePath();
     ctx.stroke();
 }
