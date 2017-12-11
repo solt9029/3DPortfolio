@@ -62,10 +62,25 @@ function initCamera() {
     camera.lookAt({x: 100, y: 0, z: 0});
 }
 
+var particles;
+function initParticles() {
+    var geometry = new THREE.Geometry();
+
+    for (var i = 0; i < 1000; i++) {
+        geometry.vertices[i] = new THREE.Vector3(200, Math.random() * 400 - 200, Math.random() * 400 - 200);
+    }
+    
+    var material = new THREE.ParticleBasicMaterial({color: 0xFFFFFF, size: 1});
+    particles = new THREE.ParticleSystem(geometry, material);
+    scene.add(particles);
+}
+
 var works = [];
 var rayReceiveObjects = [];
 var texts = [];
 function initObject() {
+    initParticles();
+
     var geometry = new THREE.CubeGeometry(30, 30, 30);
 
     for (var i = 0; i < portfolioData.length; i++) {
