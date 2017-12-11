@@ -17,7 +17,7 @@ function initThree() {
     if (!renderer) alert('Three.js の初期化に失敗しました');
     renderer.setSize(window.innerWidth, window.innerHeight);
     canvasFrame.appendChild(renderer.domElement);
-    renderer.setClearColor(0xEEEEEE, 1.0);
+    renderer.setClearColor(0x000000, 1.0);
 
     scene = new THREE.Scene();
 }
