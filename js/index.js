@@ -4,6 +4,7 @@ $(function() {
     initEvent();
     initObject();
     initCamera();
+    $('#modal').modal('show');
     loop();
 });
 
@@ -22,6 +23,7 @@ function initThree() {
     scene = new THREE.Scene();
 }
 
+// canvas2dを初期化する
 var canvas2d, ctx;
 function initTwo() {
     canvas2d = document.getElementById('canvas2d');
@@ -185,6 +187,7 @@ function initEvent() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        initTwo();
     });
 }
 

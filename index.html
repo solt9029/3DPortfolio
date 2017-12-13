@@ -16,6 +16,10 @@
     <script src="./libraries/fonts/droid/droid_serif_regular.typeface.js"></script>
     <script src="./libraries/fonts/droid/droid_serif_bold.typeface.js"></script>
     <!-- <script src="./libraries/three.js_r58/controls/TrackballControls.js"></script> -->
+
+    <link rel="stylesheet" href="./libraries/bootstrap/bootstrap.min.css">
+    <script src="./libraries/bootstrap/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/portfolioData.js"></script>
     <script src="./js/index.js"></script>
@@ -23,5 +27,20 @@
 <body>
     <div id="canvas3d"></div>
     <canvas id="canvas2d"></canvas>
+
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal タイトル</h4>
+                </div>
+                <div class="modal-body">Modal内容</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
