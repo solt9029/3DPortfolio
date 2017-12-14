@@ -4,7 +4,6 @@ $(function() {
     initEvent();
     initObject();
     initCamera();
-    $('#modal').modal('show');
     loop();
 });
 
@@ -97,6 +96,8 @@ function initObject() {
             Math.sin(Math.radians(i * 360 / portfolioData.length)) * 100, 0);
         rayReceiveObjects.push(works[i]);
         works[i].name = portfolioData[i].name;
+        works[i].img = portfolioData[i].img;
+        works[i].desc = portfolioData[i].desc;
         works[i].url = portfolioData[i].url;
         works[i].degree = 0;
     }
@@ -157,7 +158,11 @@ function initEvent() {
             (event.clientX / window.innerWidth) * 2 - 1, 
             (event.clientY / window.innerHeight) * 2 - 1);
         if (obj !== false) {
-            window.open(obj.url, '_blank');
+            $('#modalTitle').text(obj.name);
+            $('#modalThumb').attr('src', './images/' + obj.img);
+            $('#modalDesc').text(obj.desc);
+            $('#moreBtn').attr('href', obj.url);
+            $('#modal').modal('show');
         }
     });
 
@@ -167,15 +172,21 @@ function initEvent() {
         var SPACE = 32;
         switch (event.keyCode) {
             case RIGHT:
+                $('#modal').modal('hide');
                 translateValue -= 360;
                 break;
             case LEFT:
+                $('#modal').modal('hide');
                 translateValue += 360;
                 break;
             case SPACE:
                 var obj = getIntersects(0, 0);
                 if (obj !== false) {
-                    window.open(obj.url, '_blank');
+                    $('#modalTitle').text(obj.name);
+                    $('#modalThumb').attr('src', './images/' + obj.img);
+                    $('#modalDesc').text(obj.desc);
+                    $('#moreBtn').attr('href', obj.url);
+                    $('#modal').modal('show');
                 }
                 break;
             default:
