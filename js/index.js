@@ -82,9 +82,8 @@ var texts = [];
 function initObject() {
     initParticles();
 
-    var geometry = new THREE.CubeGeometry(30, 30, 30);
-
     for (var i = 0; i < portfolioData.length; i++) {
+        var geometry = new THREE.CubeGeometry(15 + portfolioData[i].size * 0.3, 15 + portfolioData[i].size * 0.3, 15 + portfolioData[i].size * 0.3);
         var texture = THREE.ImageUtils.loadTexture('../images/' + portfolioData[i].img);
         texture.anisotropy = renderer.getMaxAnisotropy();
         var material = new THREE.MeshBasicMaterial({map: texture});
